@@ -1,0 +1,10 @@
+taskmanager\model\ParentTaskTO.class
+taskmanager\model\TaskTO.class
+taskmanager\entity\Task.class
+taskmanager\service\ParentTaskService.class
+taskmanager\application\TaskManagerSpringApplication.class
+taskmanager\repository\TaskRepository.class
+taskmanager\controller\TaskManagerController.class
+taskmanager\service\TaskService.class
+taskmanager\repository\ParentTaskRepository.class
+taskmanager\entity\ParentTask.class

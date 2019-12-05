@@ -82,7 +82,7 @@ public class TaskManagerController {
 	/**
 	 * @return
 	 */
-	@CrossOrigin(origins="http://localhost:8083")
+
 	@RequestMapping(value = "/taskmanager/tasks", produces = "application/json", method = RequestMethod.GET)
 	public List<TaskTO> getTasks() {
 
@@ -102,7 +102,7 @@ public class TaskManagerController {
 	 * @param id
 	 * @return
 	 */
-	@CrossOrigin(origins="http://localhost:8083")
+
 	@RequestMapping(value = "/taskmanager/task/create", consumes = "application/json", produces = "application/json", method = RequestMethod.POST)
 	public ResponseEntity createTask(@RequestBody TaskTO taskModel) {
 
@@ -168,7 +168,6 @@ public class TaskManagerController {
 	 * @param book
 	 * @return
 	 */
-	@CrossOrigin(origins="http://localhost:8083")
 	@RequestMapping(value = "taskmanager/task/modify", produces = "application/json", method = RequestMethod.PUT)
 	public ResponseEntity updateTask(@RequestBody TaskTO taskModel) {
 		Task entity = new Task();

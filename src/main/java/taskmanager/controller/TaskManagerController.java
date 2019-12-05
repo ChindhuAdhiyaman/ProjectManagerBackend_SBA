@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -65,7 +66,9 @@ public class TaskManagerController {
 
 		ParentTaskTO pTaskModel = new ParentTaskTO();
 		TaskTO taskModel = new TaskTO();
+		if(task.getTaskId()!=null){
 		taskModel.setTaskId(task.getTaskId());
+		}
 		taskModel.setTaskName(task.getTask());
 		taskModel.setPriority(task.getPriority());
 		taskModel.setStartDate(task.getStartDate());
@@ -78,11 +81,39 @@ public class TaskManagerController {
 		}
 		return taskModel;
 	}
+	
+	
+	private ParentTaskTO convertpTaskEntityToModel(ParentTask pTask) {
+
+		ParentTaskTO pTaskModel = new ParentTaskTO();
+		TaskTO taskModel = new TaskTO();
+		List<TaskTO> taskModels = new ArrayList<TaskTO>();
+		
+		pTaskModel.setParentId(pTask.getParentId());
+		pTaskModel.setParentTask(pTask.getParentTask());
+		
+		if(pTask.getTasks()!=null) {
+		for(Task task :pTask.getTasks()) {
+			taskModel.setTaskId(task.getTaskId());
+			taskModel.setTaskName(task.getTask());
+			taskModel.setPriority(task.getPriority());
+			taskModel.setStartDate(task.getStartDate());
+			taskModel.setEndDate(task.getEndDate());
+			taskModels.add(taskModel);		
+			
+		}
+		pTaskModel.setTasks(taskModels);
+		}
+		
+		
+	
+		return pTaskModel;
+	}
 
 	/**
 	 * @return
 	 */
-
+	@CrossOrigin
 	@RequestMapping(value = "/taskmanager/tasks", produces = "application/json", method = RequestMethod.GET)
 	public List<TaskTO> getTasks() {
 
@@ -97,12 +128,46 @@ public class TaskManagerController {
 		}
 		return taskModels;
 	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/taskmanager/tasks/{taskname}", produces = "application/json", method = RequestMethod.GET)
+	public ResponseEntity getTaskByName(@PathVariable("taskname") String taskName) {
+
+		TaskTO taskModel = new TaskTO();
+		Task task = taskService.geTaskByName(taskName);
+
+		taskModel = convertEntityToModel(task);
+		if (taskModel != null) {
+
+			return ResponseEntity.ok(taskModel);
+		} else {
+
+			return ResponseEntity.noContent().build();
+		}
+	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/taskmanager/pTasks/{taskname}", produces = "application/json", method = RequestMethod.GET)
+	public ResponseEntity getpTaskByName(@PathVariable("taskname") String taskName) {
+
+		ParentTaskTO pTaskModel = null;
+		ParentTask pTask = pTaskService.getpTaskByName(taskName);
+		pTaskModel = convertpTaskEntityToModel(pTask);
+		if (pTaskModel != null) {
+
+			return ResponseEntity.ok(pTaskModel);
+		} else {
+
+			return ResponseEntity.noContent().build();
+		}
+	}
 
 	/**
 	 * @param id
 	 * @return
 	 */
 
+	@CrossOrigin
 	@RequestMapping(value = "/taskmanager/task/create", consumes = "application/json", produces = "application/json", method = RequestMethod.POST)
 	public ResponseEntity createTask(@RequestBody TaskTO taskModel) {
 
@@ -168,6 +233,7 @@ public class TaskManagerController {
 	 * @param book
 	 * @return
 	 */
+	@CrossOrigin
 	@RequestMapping(value = "taskmanager/task/modify", produces = "application/json", method = RequestMethod.PUT)
 	public ResponseEntity updateTask(@RequestBody TaskTO taskModel) {
 		Task entity = new Task();

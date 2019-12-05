@@ -23,9 +23,9 @@ import javax.persistence.TemporalType;
 @Table(name="task")
 public class Task {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="task_id")
-	private int taskId;
+	private Integer taskId;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="end_date")
@@ -58,11 +58,11 @@ public class Task {
 	public Task() {
 	}
 
-	public int getTaskId() {
+	public Integer getTaskId() {
 		return this.taskId;
 	}
 
-	public void setTaskId(int taskId) {
+	public void setTaskId(Integer taskId) {
 		this.taskId = taskId;
 	}
 

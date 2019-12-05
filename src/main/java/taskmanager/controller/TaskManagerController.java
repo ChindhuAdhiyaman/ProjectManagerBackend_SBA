@@ -3,21 +3,18 @@
  */
 package taskmanager.controller;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import taskmanager.entity.ParentTask;
 import taskmanager.entity.Task;
@@ -85,6 +82,7 @@ public class TaskManagerController {
 	/**
 	 * @return
 	 */
+	@CrossOrigin(origins="http://localhost:8083")
 	@RequestMapping(value = "/taskmanager/tasks", produces = "application/json", method = RequestMethod.GET)
 	public List<TaskTO> getTasks() {
 
@@ -104,6 +102,7 @@ public class TaskManagerController {
 	 * @param id
 	 * @return
 	 */
+	@CrossOrigin(origins="http://localhost:8083")
 	@RequestMapping(value = "/taskmanager/task/create", consumes = "application/json", produces = "application/json", method = RequestMethod.POST)
 	public ResponseEntity createTask(@RequestBody TaskTO taskModel) {
 
@@ -136,7 +135,7 @@ public class TaskManagerController {
 		task.setStartDate(taskModel.getStartDate());
 		task.setEndDate(taskModel.getEndDate());
 		task.setPriority(taskModel.getPriority());
-		if (taskModel.getParentTask().getParentTask() != null) {
+		if (taskModel.getParentTask() != null) {
 			pTask = pTaskService.getpTaskByName(taskModel.getParentTask().getParentTask());
 
 			if (pTask != null) {
@@ -169,6 +168,7 @@ public class TaskManagerController {
 	 * @param book
 	 * @return
 	 */
+	@CrossOrigin(origins="http://localhost:8083")
 	@RequestMapping(value = "taskmanager/task/modify", produces = "application/json", method = RequestMethod.PUT)
 	public ResponseEntity updateTask(@RequestBody TaskTO taskModel) {
 		Task entity = new Task();

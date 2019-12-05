@@ -20,7 +20,7 @@ import javax.persistence.Table;
 public class ParentTask {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="parent_id")
 	private int parentId;
 

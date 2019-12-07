@@ -4,6 +4,7 @@
 package taskmanager.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,21 +44,7 @@ public class TaskManagerController {
 	 * @param id
 	 * @return
 	 */
-//	@RequestMapping(value = "taskmanager/task/{id}", produces = "application/json", method = RequestMethod.GET)
-//	public ResponseEntity getBookById(@PathVariable("id") int id) {
-//
-//		Book book = null;
-//		BookDO bookDO = bookService.findById(id);
-//		if (bookDO != null) {
-//			book = convertEntityToModel(bookDO);
-//			return ResponseEntity.ok(book);
-//		} else {
-//
-//			return ResponseEntity.noContent().build();
-//		}
-//
-//	}
-//
+
 	/**
 	 * @param bookDO
 	 * @return
@@ -77,7 +64,7 @@ public class TaskManagerController {
 			pTaskModel.setParentId(task.getParentTask().getParentId());
 			pTaskModel.setParentTask(task.getParentTask().getParentTask());
 			;
-			taskModel.setParentTask(pTaskModel);
+			taskModel.setParentTaskName(task.getParentTask().getParentTask());
 		}
 		return taskModel;
 	}
@@ -161,6 +148,56 @@ public class TaskManagerController {
 			return ResponseEntity.noContent().build();
 		}
 	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/taskmanager/tasks/{priority}", produces = "application/json", method = RequestMethod.GET)
+	public ResponseEntity getTaskByPriority(@PathVariable("priority") Integer priority) {
+
+		TaskTO taskModel = new TaskTO();
+		Task task = taskService.geTaskByPriority(priority);
+		taskModel = convertEntityToModel(task);
+		if (taskModel != null) {
+
+			return ResponseEntity.ok(taskModel);
+		} else {
+
+			return ResponseEntity.noContent().build();
+		}
+	}
+
+	
+	@CrossOrigin
+	@RequestMapping(value = "/taskmanager/tasks/{startDate}", produces = "application/json", method = RequestMethod.GET)
+	public ResponseEntity getTaskByStartDate(@PathVariable("startDate") Date startDate) {
+
+		TaskTO taskModel = new TaskTO();
+		Task task = taskService.geTaskByStartDate(startDate);
+		taskModel = convertEntityToModel(task);
+		if (taskModel != null) {
+
+			return ResponseEntity.ok(taskModel);
+		} else {
+
+			return ResponseEntity.noContent().build();
+		}
+	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/taskmanager/tasks/{endDate}", produces = "application/json", method = RequestMethod.GET)
+	public ResponseEntity getTaskByEndDate(@PathVariable("endDate") Date endDate) {
+
+		TaskTO taskModel = new TaskTO();
+		Task task = taskService.geTaskByStartDate(endDate);
+		taskModel = convertEntityToModel(task);
+		if (taskModel != null) {
+
+			return ResponseEntity.ok(taskModel);
+		} else {
+
+			return ResponseEntity.noContent().build();
+		}
+	}
+
 
 	/**
 	 * @param id
@@ -200,16 +237,16 @@ public class TaskManagerController {
 		task.setStartDate(taskModel.getStartDate());
 		task.setEndDate(taskModel.getEndDate());
 		task.setPriority(taskModel.getPriority());
-		if (taskModel.getParentTask() != null) {
-			pTask = pTaskService.getpTaskByName(taskModel.getParentTask().getParentTask());
+		if (taskModel.getParentTaskName() != null) {
+			pTask = pTaskService.getpTaskByName(taskModel.getParentTaskName());
 
 			if (pTask != null) {
 				task.setParentId(pTask.getParentId());
 			} else {
 				pTask = new ParentTask();
-				pTask.setParentTask(taskModel.getParentTask().getParentTask());
+				pTask.setParentTask(taskModel.getParentTaskName());
 				pTaskService.addPTask(pTask);
-				getTaskParentID(task, taskModel.getParentTask().getParentTask());
+				getTaskParentID(task, taskModel.getParentTaskName());
 			}
 
 		}

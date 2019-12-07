@@ -22,7 +22,15 @@ public class TaskTO {
 
 	private String taskName;
 
-	private ParentTaskTO parentTask;
+	private String parentTaskName;
+
+	public String getParentTaskName() {
+		return parentTaskName;
+	}
+
+	public void setParentTaskName(String parentTaskName) {
+		this.parentTaskName = parentTaskName;
+	}
 
 	public TaskTO() {
 	}
@@ -67,12 +75,5 @@ public class TaskTO {
 		this.taskName = task;
 	}
 
-	public ParentTaskTO getParentTask() {
-		return this.parentTask;
-	}
-
-	public void setParentTask(ParentTaskTO parentTask) {
-		this.parentTask = parentTask;
-	}
 
 }

@@ -1,11 +1,11 @@
 Manifest-Version: 1.0
-Implementation-Title: BookMenuMVCSpringBoot
+Implementation-Title: TaskManagerMVCSpringBoot
 Implementation-Version: 0.0.1-SNAPSHOT
 Built-By: Admin
-Implementation-Vendor-Id: BookMenuMVCSpringBoot
+Implementation-Vendor-Id: TaskManagerMVCSpringBoot
 Build-Jdk: 1.8.0_144
-Implementation-URL: http://projects.spring.io/spring-boot/BookMenuMVCS
- pringBoot/
+Implementation-URL: http://projects.spring.io/spring-boot/TaskManagerM
+ VCSpringBoot/
 Created-By: Maven Integration for Eclipse
 Implementation-Vendor: Pivotal Software, Inc.
 Main-Class: bookmenu.application.MenuDemo

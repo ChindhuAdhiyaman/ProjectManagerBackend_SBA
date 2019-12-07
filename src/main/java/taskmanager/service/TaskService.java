@@ -1,6 +1,7 @@
 package taskmanager.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -58,5 +59,19 @@ public class TaskService {
 		return taskRepository.findTaskByName(taskName);
 	}
 	
+	@Transactional
+	public Task geTaskByPriority(Integer priority) {
+		return taskRepository.findTaskByPriority(priority);
+	}
+	
+	@Transactional
+	public Task geTaskByStartDate(Date startDate) {
+		return taskRepository.findTaskByStartDate(startDate);
+	}
+	
+	@Transactional
+	public Task geTaskByEndDate(Date endDate) {
+		return taskRepository.findTaskByEndDate(endDate);
+	}
 
 }

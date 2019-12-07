@@ -15,4 +15,5 @@ public interface ParentTaskRepository extends CrudRepository<ParentTask, Integer
 	@Query("FROM ParentTask WHERE parentTask = ?1")
 	ParentTask findpTaskByName(String taskName);
 	
+
 }

@@ -49,18 +49,5 @@ public class ParentTaskTO {
 		this.tasks = tasks;
 	}
 
-	public TaskTO addTask(TaskTO task) {
-		getTasks().add(task);
-		task.setParentTask(this);
-
-		return task;
-	}
-
-	public TaskTO removeTask(TaskTO task) {
-		getTasks().remove(task);
-		task.setParentTask(null);
-
-		return task;
-	}
 
 }

@@ -73,5 +73,17 @@ public class TaskService {
 	public Task geTaskByEndDate(Date endDate) {
 		return taskRepository.findTaskByEndDate(endDate);
 	}
+	
+	@Transactional
+	public Integer getProjectTaskCnt(Integer projectId) {
+		return taskRepository.findProjectTaskCount(projectId);
+	}
+	
+	
+	@Transactional
+	public Integer getCompTaskCnt(Integer projectId, String status) {
+		return taskRepository.findCompletedTaskCount(projectId, status);
+	}
+	
 
 }

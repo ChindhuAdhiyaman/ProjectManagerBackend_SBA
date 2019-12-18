@@ -7,4 +7,5 @@ taskmanager\repository\TaskRepository.class
 taskmanager\controller\TaskManagerController.class
 taskmanager\service\TaskService.class
 taskmanager\repository\ParentTaskRepository.class
+taskmanager\application\SpringSecurityConfiguration.class
 taskmanager\entity\ParentTask.class

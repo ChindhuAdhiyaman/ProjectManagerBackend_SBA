@@ -16,13 +16,53 @@ public class TaskTO {
 
 	private Date endDate;
 
-	private int priority;
+	private Integer priority;
 
 	private Date startDate;
 
 	private String taskName;
 
 	private String parentTaskName;
+	
+	private int projectId;
+	
+	private String projectName;
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+	private String status;
+
+	private String task;
+
+	public int getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(int projectId) {
+		this.projectId = projectId;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getTask() {
+		return task;
+	}
+
+	public void setTask(String task) {
+		this.task = task;
+	}
 
 	public String getParentTaskName() {
 		return parentTaskName;
@@ -51,11 +91,11 @@ public class TaskTO {
 		this.endDate = endDate;
 	}
 
-	public int getPriority() {
+	public Integer getPriority() {
 		return this.priority;
 	}
 
-	public void setPriority(int priority) {
+	public void setPriority(Integer priority) {
 		this.priority = priority;
 	}
 

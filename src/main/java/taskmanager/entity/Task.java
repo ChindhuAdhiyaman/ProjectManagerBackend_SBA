@@ -31,29 +31,62 @@ public class Task {
 	@Column(name="end_date")
 	private Date endDate;
 
+	@Column(name="parent_id")
+	private Integer parentId;
+
 	private Integer priority;
+
+	@Column(name="project_id")
+	private Integer projectId;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="start_date")
 	private Date startDate;
 
+	private String status;
+
 	private String task;
-	
-	@Column(name="parent_id")
-	private Integer parentId;
-
-	public Integer getParentId() {
-		return parentId;
-	}
-
-	public void setParentId(Integer parentId) {
-		this.parentId = parentId;
-	}
-
 	//bi-directional many-to-one association to ParentTask
 	@ManyToOne(fetch=FetchType.LAZY )
 	@JoinColumn(name="parent_id",insertable = false, updatable = false )
 	private ParentTask parentTask;
+	
+	@ManyToOne(fetch=FetchType.LAZY )
+	@JoinColumn(name="project_id",insertable = false, updatable = false )
+	private Project project;
+	
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	public int getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
+	}
+
+	public Integer getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(Integer projectId) {
+		this.projectId = projectId;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public Task() {
 	}

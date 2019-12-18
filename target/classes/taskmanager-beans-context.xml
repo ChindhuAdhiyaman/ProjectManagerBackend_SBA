@@ -67,5 +67,7 @@
 	<bean id="TaskManagerSpringApplication" class="taskmanager.application.TaskManagerSpringApplication" />
 	<bean id="ParentTaskService"  class="taskmanager.service.ParentTaskService"/>
 	<bean id="TaskService"  class="taskmanager.service.TaskService"/>
+	<bean id="ProjectService"  class="taskmanager.service.ProjectService"/>
+	<bean id="UserService"  class="taskmanager.service.UserService"/>
 	</beans>
 

@@ -23,4 +23,11 @@ public interface TaskRepository extends CrudRepository<Task, Integer> {
 	
 	@Query("FROM Task WHERE endDate = ?1")
 	Task findTaskByEndDate(Date endDate);
+	
+	@Query("SELECT COUNT(*) as taskCnt FROM Task WHERE projectId = ?1")
+	Integer findProjectTaskCount(Integer projectId);
+	
+	@Query("SELECT COUNT(*) as CmpCnt FROM Task WHERE projectId= ?1 and status =?2")
+	Integer findCompletedTaskCount(Integer projectId, String status);
+	
 }
